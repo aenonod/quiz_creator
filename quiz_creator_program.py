@@ -1,5 +1,5 @@
 # General flow of quiz creator program:
-# Ask for the filename (if user wants to create another quiz)
+# Ask for the filename (if user wants to create/open another quiz)
 # Ask user for input
 # Store data into text file
 # Loop the program until user chooses to exit
@@ -9,11 +9,12 @@ def file_naming():
     filename = input("Input your filename (w/o extension): ").strip()
     if not filename.endswith(".txt"):
         filename += ".txt"
+    return filename
 
 def quiz_creator(filename):
     with open(filename, "a") as file:
         # Input question
-        print(">>> QUIZ CREATOR <<<")
+        print("\n>>> QUIZ CREATOR <<<")
         question = input(f"Input question: ")
 
         # Input possible answers
@@ -50,28 +51,38 @@ def quiz_creator(filename):
 # Ask another input until user chooses to exit
 def program_main_loop():
     while True:
-            file_naming()
-            quiz_creator()
+        filename = file_naming()
+        quiz_creator(filename)
             
-            add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
-            if add_input == "yes":
-                print()
-                continue
-            else:
-                num_1 = print("-Press 1 to create new quiz file-")
-                num_2 = print("-Press 2 to open a quiz file-")
-                num_3 = print("-Press 3 to exit-")
+        add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
+        if add_input == "yes":
+            print()
+            continue
+        else:
+            num_1 = print("-Press 1 to create new quiz file-")
+            num_2 = print("-Press 2 to open a quiz file-")
+            num_3 = print("-Press 3 to exit-")
 
-            choice = input("Enter here: ")
-            if choice == 1:
-                program_main_loop()
-            elif choice == 2:
+        try:
+            choice = int(input("Enter your choice: "))
+        except ValueError:
+            print("Invalid input. Try again.")
+            continue
+
+        if choice == 1:
+            print("Creating new file...")
+            continue
+        elif choice == 2:
                 filename = input("Enter filename to open (with extension): ")
-                with open(filename, "r") as file:
-                    print(f"\n>>> QUIZ ({filename}) <<<")
-                    print(file.read())
-            elif choice == 3:
-                print("Goodbye, user!👋")
-            else:
-                print("Invalid input. Try again.")
-program_main_loop()
+                try:
+                    with open(filename, "r") as file:
+                        print(f"\n>>> QUIZ ({filename}) <<<")
+                        print(file.read())
+                except FileNotFoundError:
+                    print("File not found. Try again.")
+        elif choice == 3:
+            print("Goodbye, user!👋")
+        else:
+            print("Invalid input. Please choose between 1, 2, or 3.")
+        
+program_main_loop()     # Start the program
