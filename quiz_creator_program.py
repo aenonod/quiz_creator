@@ -1,25 +1,29 @@
 # Ask for user input
-# Input question
-question = input("Input a question: ")
-
-# Input possible answers
-choices_a = input("Possible answer: a. ")
-choices_b = input("Possible answer: b. ")
-choices_c = input("Possible answer: c. ")
-choices_d = input("Possible answer: d. ")
-
-# Input correct answer
-correct_ans = input("Correct answer (format: letter then desc): ")
-
 # Store data into text file
-# Not final 
-output = open("Quiz.txt", "w")
-output.write(question)
-output.write(choices_a)
-output.write(choices_b)
-output.write(choices_c)
-output.write(choices_d)
-output.write(correct_ans)
-output.close()
+def quiz_creator():
+    with open("Quiz.txt", "w") as file:
+        # Input question
+        question = input("Input a question: ")
+        file.write(question)
+
+        # Input possible answers
+        choices_a = input("Possible answer: ")
+        file.write(choices_a)
+        choices_b = input("Possible answer: ")
+        file.write(choices_b)
+        choices_c = input("Possible answer: ")
+        file.write(choices_c)
+        choices_d = input("Possible answer: ")
+        file.write(choices_d)
+            
+        # Input correct answer
+        correct_ans = input("Correct answer: ")
+        file.write(correct_ans)
+
+    file.close()
+
+    file = open("Quiz.txt", "r")
+    print(file.read())
+    file.close()
 
 # Ask another input until user chooses to exit
