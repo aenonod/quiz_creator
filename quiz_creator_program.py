@@ -50,8 +50,9 @@ def quiz_creator(filename):
 
 # Ask another input until user chooses to exit
 def program_main_loop():
+    filename = file_naming()
+    
     while True:
-        filename = file_naming()
         quiz_creator(filename)
             
         add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
