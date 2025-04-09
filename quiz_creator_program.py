@@ -6,7 +6,7 @@
 
 
 def file_naming():
-    filename = input("Input your filename (w/o extension): ").strip()
+    filename = input("\nInput your filename (w/o extension): ").strip()
     if not filename.endswith(".txt"):
         filename += ".txt"
     return filename
@@ -48,23 +48,12 @@ def quiz_creator(filename):
 
     file.close()
 
-# Ask another input until user chooses to exit
-def program_main_loop():
-    filename = file_naming()
-
+def main_menu():
     while True:
-        quiz_creator(filename)
-            
-        add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
-        if add_input == "yes":
-            print()
-            continue
-        else:
-            print("\n~~~")
-            num_1 = print("👆 Press 1 to create new quiz file")
-            num_2 = print("👆 Press 2 to view a quiz file")
-            num_3 = print("👆 Press 3 to add questions in an existing quiz file")
-            num_4 = print("👆 Press 4 to exit")
+        print("\n===== MAIN MENU =====")
+        num_1 = print("👆 Press 1 to create new or edit an existing quiz file")
+        num_2 = print("👆 Press 2 to view a quiz file")
+        num_3 = print("👆 Press 3 to exit")
 
         try:
             choice = int(input("\n⭐ Enter your choice: "))
@@ -73,28 +62,40 @@ def program_main_loop():
             continue
 
         if choice == 1:
-            print("Creating new file...")
-            continue
+            filename = file_naming()
+            add_questions(filename)
         elif choice == 2:
-            filename = input("Enter filename to open (with extension): ")
+            filename = input("\nEnter filename to open (with extension): ")
             try:
                 with open(filename, "r") as file:
                     print(f"\n>>> QUIZ ({filename}) <<<")
                     print(file.read())
-                    break
+                    
+                    back = input("Go back to main menu? (yes/no): ")
+                    if back == "yes":
+                        main_menu()
+                    else:
+                        break
             except FileNotFoundError:
                 print("File not found. Try again.")
         elif choice == 3:
-                filename = input("Enter filename to open (with extension): ")
-                try:
-                    with open(filename, "r") as file:
-                        print(f"\n>>> QUIZ ({filename}) <<<")
-                        print(file.read())
-                except FileNotFoundError:
-                    print("File not found. Try again.")
-        elif choice == 4:
-            print("Goodbye, user!👋")
+                print("\nGoodbye, user!👋")
+                break
         else:
             print("Invalid input. Please choose between 1, 2, or 3.")
+            continue
+
+def add_questions(filename):
+    while True:
+        quiz_creator(filename)
+            
+        add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
+        if add_input == "yes":
+            print()
+            continue
+        else:
+            main_menu()
         
-program_main_loop()     # Start the program
+# Start the program
+if __name__ == "__main__":
+    main_menu()
