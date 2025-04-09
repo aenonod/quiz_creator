@@ -1,0 +1,70 @@
+
+Question: What is the capital city of the Philippines?
+a) manila
+b) baguio
+c) cavite
+d) biringan
+Correct answer: a) manila
+
+Question: Which country is known as the "Land of the Rising Sun?
+a) philippines
+b) japan
+c) antartica
+d) india
+Correct answer: b) japan
+
+Question: What is the largest island in the world?
+a) ireland
+b) greenland
+c) hawaii
+d) bali
+Correct answer: b) greenland
+
+Question: Which mountain is the highest in the world?
+a) mount fuji
+b) mount apo
+c) mount everest
+d) mount ararat
+Correct answer: c) mount everest
+
+Question: Which city is the capital of France?
+a) marseille
+b) lyon
+c) nice
+d) paris
+Correct answer: d) paris
+
+Question: Which desert is located in northern Africa?
+a) syrian desert
+b) arabian desert
+c) sahara desert
+d) gobi desert
+Correct answer: c) sahara desert
+
+Question: Which country is home to the ancient city of Babylon?
+a) iraq
+b) iran
+c) turkey
+d) jordan
+Correct answer: a) iraq
+
+Question: Which sea separates Saudi Arabia from Africa?
+a) sulu sea
+b) red sea
+c) black sea
+d) blue sea
+Correct answer: b) red sea
+
+Question: Which country is known as the "Land of the Midnight Sun"?
+a) norway
+b) yesway
+c) japan
+d) biringan
+Correct answer: a) norway
+
+Question: What is the capital of Thailand?
+a) beijing
+b) tokyo
+c) manila
+d) bangkok
+Correct answer: d) bangkok
