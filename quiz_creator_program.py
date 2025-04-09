@@ -1,26 +1,26 @@
-# Ask for user input
-# Store data into text file
-def quiz_creator():
+def quiz_creator(count):
     with open("quiz.txt", "w") as file:
         # Input question
-        print("=========== QUIZ CREATOR ==========")
-        question = input("Input a question: ")
-        file.write(f"\nQuestion: {question}")
+        print(">>> QUIZ CREATOR <<<")
+        question = input(f"Input question {count}: ")
 
         # Input possible answers
         print("\nNote: No need to put letters in the choices. Let the quiz creator run it's magic!✨")
         choices_a = input("Possible answer: ").lower()
-        file.write(f"\na) {choices_a}")
         choices_b = input("Possible answer: ").lower()
-        file.write(f"\nb) {choices_b}")
         choices_c = input("Possible answer: ").lower()
-        file.write(f"\nc) {choices_c}")
         choices_d = input("Possible answer: ").lower()
+
+        # Input correct answer
+        correct_ans = input("\nCorrect answer: ").lower()
+
+        # Store data into text file
+        file.write(f"\nQuestion {count}: {question}")
+        file.write(f"\na) {choices_a}")
+        file.write(f"\nb) {choices_b}")
+        file.write(f"\nc) {choices_c}")
         file.write(f"\nd) {choices_d}")
             
-        # Input correct answer
-        correct_ans = input(f"\nCorrect answer: ").lower()
-
         letter = ""
         if correct_ans == choices_a:
             letter = 'a)'
