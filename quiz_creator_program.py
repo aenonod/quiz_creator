@@ -42,17 +42,18 @@ def quiz_creator(count):
 
     file.close()
 
-# Ask another input until user chooses to exit
+# Ask another input until user chooses to 
+count = 1
 while True:
-    num = 0
-    quiz_creator(+1)
+    quiz_creator(count)
         
     add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
     if add_input == "yes":
+        count += 1
         print()
         continue
     else:
-        file = open("quiz.txt", "r")
-        print(file.read())
-        file.close()
+        with open("quiz.txt", "r") as file:
+            print("\n>>> FINAL QUIZ CONTENT <<<")
+            print(file.read())
         break
