@@ -12,4 +12,14 @@ choices_d = input("Possible answer: d. ")
 correct_ans = input("Correct answer (format: letter then desc): ")
 
 # Store data into text file
+# Not final 
+output = open("Quiz.txt", "w")
+output.write(question)
+output.write(choices_a)
+output.write(choices_b)
+output.write(choices_c)
+output.write(choices_d)
+output.write(correct_ans)
+output.close()
+
 # Ask another input until user chooses to exit
