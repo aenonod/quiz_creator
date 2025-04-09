@@ -5,11 +5,11 @@
 # Work with the output display (fonts, bold, italics, etc.)
 
 
-def quiz_creator(count):
+def quiz_creator():
     with open("quiz.txt", "a") as file:
         # Input question
         print(">>> QUIZ CREATOR <<<")
-        question = input(f"Input question {count}: ")
+        question = input(f"Input question: ")
 
         # Input possible answers
         print("\nNote: No need to put letters in the choices. Let the quiz creator run it's magic!✨")
@@ -22,7 +22,7 @@ def quiz_creator(count):
         correct_ans = input("\nCorrect answer: ").lower()
 
         # Store data into text file
-        file.write(f"\nQuestion {count}: {question}")
+        file.write(f"\nQuestion: {question}")
         file.write(f"\na) {choices_a}")
         file.write(f"\nb) {choices_b}")
         file.write(f"\nc) {choices_c}")
@@ -42,14 +42,12 @@ def quiz_creator(count):
 
     file.close()
 
-# Ask another input until user chooses to 
-count = 1
+# Ask another input until user chooses to exit
 while True:
-    quiz_creator(count)
+    quiz_creator()
         
     add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
     if add_input == "yes":
-        count += 1
         print()
         continue
     else:
