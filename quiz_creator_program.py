@@ -5,12 +5,14 @@
 # Loop the program until user chooses to exit
 
 
+# Function to set filename var (for creating/opening a file)
 def file_naming():
     filename = input("\nInput your filename (w/o extension): ").strip()
     if not filename.endswith(".txt"):
         filename += ".txt"
     return filename
 
+# Function to ask user for input then store the collected data
 def quiz_creator(filename):
     with open(filename, "a") as file:
         # Input question
@@ -48,6 +50,7 @@ def quiz_creator(filename):
 
     file.close()
 
+# Function for main menu
 def main_menu():
     while True:
         print("\n===== MAIN MENU =====")
@@ -57,17 +60,17 @@ def main_menu():
 
         try:
             choice = int(input("\n⭐ Enter your choice: "))
-        except ValueError:
+        except ValueError:   # Error if user input isn't in the choices
             print("Invalid input. Try again.")
             continue
 
         if choice == 1:
-            filename = file_naming()
-            add_questions(filename)
+            filename = file_naming()   # Will ask for a filename
+            add_questions(filename)   # Loop to ask user for question/s
         elif choice == 2:
             filename = input("\nEnter filename to open (with extension): ")
             try:
-                with open(filename, "r") as file:
+                with open(filename, "r") as file:   # Open file to read
                     print(f"\n>>> QUIZ ({filename}) <<<")
                     print(file.read())
                     
@@ -81,10 +84,8 @@ def main_menu():
         elif choice == 3:
             print("\nGoodbye, user!👋")
             break
-        else:
-            print("Invalid input. Please choose between 1, 2, or 3.")
-            continue
 
+# Function to add more questions in a file
 def add_questions(filename):
     while True:
         quiz_creator(filename)
