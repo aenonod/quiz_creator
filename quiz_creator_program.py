@@ -6,7 +6,7 @@
 
 
 def quiz_creator(count):
-    with open("quiz.txt", "w") as file:
+    with open("quiz.txt", "a") as file:
         # Input question
         print(">>> QUIZ CREATOR <<<")
         question = input(f"Input question {count}: ")
@@ -38,7 +38,7 @@ def quiz_creator(count):
         elif correct_ans == choices_d:
             letter = 'd)'
 
-        file.write(f"\nCorrect answer: {letter} {correct_ans}")
+        file.write(f"\nCorrect answer: {letter} {correct_ans}\n")
 
     file.close()
 
