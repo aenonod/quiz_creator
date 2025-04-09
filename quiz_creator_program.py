@@ -73,14 +73,14 @@ def main_menu():
                     
                     back = input("Go back to main menu? (yes/no): ")
                     if back == "yes":
-                        main_menu()
+                        continue
                     else:
                         break
             except FileNotFoundError:
                 print("File not found. Try again.")
         elif choice == 3:
-                print("\nGoodbye, user!👋")
-                break
+            print("\nGoodbye, user!👋")
+            break
         else:
             print("Invalid input. Please choose between 1, 2, or 3.")
             continue
