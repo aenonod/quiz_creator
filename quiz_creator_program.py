@@ -51,7 +51,7 @@ def quiz_creator(filename):
 # Ask another input until user chooses to exit
 def program_main_loop():
     filename = file_naming()
-    
+
     while True:
         quiz_creator(filename)
             
@@ -60,12 +60,14 @@ def program_main_loop():
             print()
             continue
         else:
-            num_1 = print("-Press 1 to create new quiz file-")
-            num_2 = print("-Press 2 to open a quiz file-")
-            num_3 = print("-Press 3 to exit-")
+            print("\n~~~")
+            num_1 = print("👆 Press 1 to create new quiz file")
+            num_2 = print("👆 Press 2 to view a quiz file")
+            num_3 = print("👆 Press 3 to add questions in an existing quiz file")
+            num_4 = print("👆 Press 4 to exit")
 
         try:
-            choice = int(input("Enter your choice: "))
+            choice = int(input("\n⭐ Enter your choice: "))
         except ValueError:
             print("Invalid input. Try again.")
             continue
@@ -74,6 +76,15 @@ def program_main_loop():
             print("Creating new file...")
             continue
         elif choice == 2:
+            filename = input("Enter filename to open (with extension): ")
+            try:
+                with open(filename, "r") as file:
+                    print(f"\n>>> QUIZ ({filename}) <<<")
+                    print(file.read())
+                    break
+            except FileNotFoundError:
+                print("File not found. Try again.")
+        elif choice == 3:
                 filename = input("Enter filename to open (with extension): ")
                 try:
                     with open(filename, "r") as file:
@@ -81,7 +92,7 @@ def program_main_loop():
                         print(file.read())
                 except FileNotFoundError:
                     print("File not found. Try again.")
-        elif choice == 3:
+        elif choice == 4:
             print("Goodbye, user!👋")
         else:
             print("Invalid input. Please choose between 1, 2, or 3.")
