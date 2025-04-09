@@ -1,3 +1,10 @@
+# General flow of quiz creator program:
+# Ask user for input
+# Store data into text file
+# Loop the program until user chooses to exit
+# Work with the output display (fonts, bold, italics, etc.)
+
+
 def quiz_creator(count):
     with open("quiz.txt", "w") as file:
         # Input question
