@@ -7,6 +7,7 @@
 # c. Questions will be randomly answered by the user
 #    Program will check if the answer is correct
 
+import random
 
 # Function to set filename var (for creating/opening a file)
 def file_naming():
@@ -86,7 +87,42 @@ def load_quiz(filename):
     return quiz
 
 # Run the quiz
-# Shuffle questions
+def run_quiz(quiz):
+    random.shuffle(quiz)     # Shuffle questions
+    score = 0
+
+    for entry in quiz:
+        print("\n" + entry["question"])
+        for choice in entry["choices"]:
+            print(choice)
+        user_input = input("\nYour answer (a/b/c/d): ").strip()
+        
+        if user_input == entry["answer"]:
+            print("\n✅ Correct +1 point!")
+            score += 1
+        else:
+            print(f"\n❌ Wrong! The answer was {entry['answer']}.")
+            
+        to_proceed = input("\nDo you want to continue? (yes/no): ")
+        if to_proceed == "yes":
+            continue
+        elif to_proceed == "no":
+            print(f"\nYour final score: {score}/{len(quiz)}")
+            
+        while True:
+            try:
+                print("\n❗ Entering 'no' will exit the program.")
+                back = input("Do you want to go to main menu? (yes/no): ")
+                
+                if back not in ["yes", "no"]:
+                    raise ValueError("Invalid input. Please answer with 'yes' or 'no'.")
+                
+                if back == "yes":
+                    main_menu()
+                elif back == "no":
+                    break  
+            except ValueError as error:
+                print(error)
 
 # Function for main menu
 def main_menu():
