@@ -21,16 +21,21 @@ def quiz_creator(filename):
     with open(filename, "a") as file:
         # Input question
         print("\n>>> QUIZ CREATOR <<<")
-        question = input(f"Input question: ")
+        question = input(f"Input question: ").strip()
 
         # Input possible answers
-        choices_a = input("Possible answer: a) ").lower()
-        choices_b = input("Possible answer: b) ").lower()
-        choices_c = input("Possible answer: c) ").lower()
-        choices_d = input("Possible answer: d) ").lower()
+        choices_a = input("Possible answer: a) ").strip().lower()
+        choices_b = input("Possible answer: b) ").strip().lower()
+        choices_c = input("Possible answer: c) ").strip().lower()
+        choices_d = input("Possible answer: d) ").strip().lower()
 
         # Input correct answer
-        correct_ans = input("\nCorrect answer (a/b/c/d): ").lower()
+        while True:
+            correct_ans = input("\nCorrect answer (a/b/c/d): ").strip().lower()
+            if correct_ans in ["a", "b", "c", "d"]:
+                break
+            else:
+                print("❌ Invalid choice. Please enter only 'a', 'b', 'c', or 'd'.")
 
         # Store data into text file
         file.write(f"\nQuestion: {question}")
@@ -38,7 +43,6 @@ def quiz_creator(filename):
         file.write(f"\nb) {choices_b}")
         file.write(f"\nc) {choices_c}")
         file.write(f"\nd) {choices_d}")
-
         file.write(f"\nCorrect answer: {correct_ans}\n")
 
 # Function to add more questions in a file
