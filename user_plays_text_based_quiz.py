@@ -86,41 +86,43 @@ def load_quiz(filename):
 def run_quiz(quiz):
     random.shuffle(quiz)     # Shuffle questions
     score = 0
-
-    for entry in quiz:
+    total = len(quiz)
+    unanswered = total
+    
+    index = 0
+    while index < total:
+        entry = quiz[index]
         print("\n" + entry["question"])
         for choice in entry["choices"]:
             print(choice)
+            
         user_input = input("\nYour answer (a/b/c/d): ").strip().lower()
         
         if user_input == entry["answer"]:
-            print("\n✅ Correct! +1 point!")
             score += 1
+            print(f"""\n✅ Correct! +1 point!
+📊 Your current score: {score}/{len(quiz)}""")
         else:
-            print(f"\n❌ Wrong! The answer was {entry['answer']}.")
+            print(f"""\n❌ Wrong! The answer was {entry['answer']}
+📊 Your current score: {score}/{len(quiz)}""")
             
-        to_proceed = input("\nDo you want to continue? (yes/no): ").lower()
-        if to_proceed == "yes":
-            continue
-        elif to_proceed == "no":
-            print(f"\nYour final score: {score}/{len(quiz)}")
+        index += 1
+        
+        unanswered -= 1
+        if unanswered == 0:
+            print(f"\n\n🏁 Quiz finished! Your final score: {score}/{total}")
+            
+    while True:
+        print("\n❗ Entering 'no' will exit the program.")
+        back = input("Do you want to go to main menu? (yes/no): ")
+            
+        if back == "yes":
+            return
+        elif back == "no":
+            print("\nGoodbye, user!👋")
+            exit()
         else:
             print("Invalid input. Please answer with 'yes' or 'no'.")
-            
-        while True:
-            try:
-                print("\n❗ Entering 'no' will exit the program.")
-                back = input("Do you want to go to main menu? (yes/no): ")
-                
-                if back not in ["yes", "no"]:
-                    raise ValueError("Invalid input. Please answer with 'yes' or 'no'.")
-                
-                if back == "yes":
-                    return
-                elif back == "no":
-                    break  
-            except ValueError as error:
-                print(error)
 
 # Function for main menu
 def main_menu():
