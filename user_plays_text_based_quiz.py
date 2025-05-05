@@ -21,10 +21,10 @@ def quiz_creator(filename):
     with open(filename, "a") as file:
         # Input question
         print("\n>>> QUIZ CREATOR <<<")
-        question = input(f"Input question: ").strip()
+        question = input(f"\nInput question: ").strip()
 
         # Input possible answers
-        choices_a = input("Possible answer: a) ").strip().lower()
+        choices_a = input("\nPossible answer: a) ").strip().lower()
         choices_b = input("Possible answer: b) ").strip().lower()
         choices_c = input("Possible answer: c) ").strip().lower()
         choices_d = input("Possible answer: d) ").strip().lower()
@@ -49,13 +49,17 @@ def quiz_creator(filename):
 def add_questions(filename):
     while True:
         quiz_creator(filename)
-            
-        add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
-        if add_input == "yes":
-            print()
-            continue
-        else:
-            return
+
+        while True:
+            add_input = input("\nDo you want to add more questions? (yes/no): ").strip().lower()
+
+            if add_input == "yes":
+                print()
+                break  # Break inner loop and continue outer loop
+            elif add_input == "no":
+                return  # Exit function entirely
+            else:
+                print("Invalid input. Please answer with 'yes' or 'no'.")
 
 # Load to quiz from file
 def load_quiz(filename):
