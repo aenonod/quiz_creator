@@ -31,7 +31,7 @@ def quiz_creator(filename):
         choices_d = input("Possible answer: ").lower()
 
         # Input correct answer
-        correct_ans = input("\nCorrect answer: ").lower()
+        correct_ans = input("\nCorrect answer (a/b/c/d): ").lower()
 
         # Store data into text file
         file.write(f"\nQuestion: {question}")
@@ -136,24 +136,25 @@ def main_menu():
         try:
             choice = int(input("\n⭐ Enter your choice: "))
             
-            if choice not in ["1", "2", "3", "4"]:
+            if choice not in [1, 2, 3, 4]:
                 raise ValueError("Invalid input. Try again.")
 
-            if choice == "1":
+            if choice == 1:
                 while True:
                     try:
                         filename = input("\nEnter filename to open (with extension): ")
                         quiz = load_quiz(filename)
                         run_quiz(quiz)
+                        break
                     except FileNotFoundError:
                         print("File not found. Try again.")
                         continue
                 
-            elif choice == "2":
+            elif choice == 2:
                 filename = file_naming()   # Will ask for a filename
                 add_questions(filename)   # Loop to ask user for question/s
                     
-            elif choice == "3":
+            elif choice == 3:
                 while True:
                     filename = input("\nEnter filename to open (with extension): ")
                     try:
@@ -161,7 +162,7 @@ def main_menu():
                             print(f"\n>>> QUIZ ({filename}) <<<")
                             print(file.read())
                     except FileNotFoundError:
-                        print("File not found. Try again.")
+                        print("\nFile not found. Try again.")
                         continue
                     
                     print("\n❗ Entering 'no' will exit the program.")        
@@ -172,7 +173,7 @@ def main_menu():
                         print("\nExiting...")
                         exit()
             
-            elif choice == "4":
+            elif choice == 4:
                 print("\nGoodbye, user!👋")
                 break
             
