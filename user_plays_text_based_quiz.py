@@ -1,8 +1,11 @@
 # General flow of quiz creator program:
-# Ask for the filename (if user wants to create/open another quiz)
-# Ask user for input
-# Store data into text file
-# Loop the program until user chooses to exit
+# a. Ask for the filename (if user wants to create/open another quiz)
+#    Ask user for input
+#    Store data into text file
+#    Loop the program until user chooses to exit
+# b. View quiz file
+# c. Questions will be randomly answered by the user
+#    Program will check if the answer is correct
 
 
 # Function to set filename var (for creating/opening a file)
@@ -50,6 +53,23 @@ def quiz_creator(filename):
 
     file.close()
 
+# Function to add more questions in a file
+def add_questions(filename):
+    while True:
+        quiz_creator(filename)
+            
+        add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
+        if add_input == "yes":
+            print()
+            continue
+        else:
+            main_menu()
+
+# Load to quiz from file
+
+# Run the quiz
+# Shuffle questions
+
 # Function for main menu
 def main_menu():
     while True:
@@ -84,18 +104,6 @@ def main_menu():
         elif choice == 3:
             print("\nGoodbye, user!👋")
             break
-
-# Function to add more questions in a file
-def add_questions(filename):
-    while True:
-        quiz_creator(filename)
-            
-        add_input = input("\nDo you want to add more questions? (yes/no): ").lower()
-        if add_input == "yes":
-            print()
-            continue
-        else:
-            main_menu()
         
 # Start the program
 if __name__ == "__main__":
