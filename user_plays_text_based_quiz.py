@@ -24,11 +24,10 @@ def quiz_creator(filename):
         question = input(f"Input question: ")
 
         # Input possible answers
-        print("\nNote: No need to put letters in the choices. Let the quiz creator run it's magic!✨")
-        choices_a = input("Possible answer: ").lower()
-        choices_b = input("Possible answer: ").lower()
-        choices_c = input("Possible answer: ").lower()
-        choices_d = input("Possible answer: ").lower()
+        choices_a = input("Possible answer: a) ").lower()
+        choices_b = input("Possible answer: b) ").lower()
+        choices_c = input("Possible answer: c) ").lower()
+        choices_d = input("Possible answer: d) ").lower()
 
         # Input correct answer
         correct_ans = input("\nCorrect answer (a/b/c/d): ").lower()
@@ -39,20 +38,8 @@ def quiz_creator(filename):
         file.write(f"\nb) {choices_b}")
         file.write(f"\nc) {choices_c}")
         file.write(f"\nd) {choices_d}")
-            
-        letter = ""
-        if correct_ans == choices_a:
-            letter = 'a)'
-        elif correct_ans == choices_b:
-            letter = 'b)'
-        elif correct_ans == choices_c:
-            letter = 'c)'
-        elif correct_ans == choices_d:
-            letter = 'd)'
 
-        file.write(f"\nCorrect answer: {letter} {correct_ans}\n")
-
-    file.close()
+        file.write(f"\nCorrect answer: {correct_ans}\n")
 
 # Function to add more questions in a file
 def add_questions(filename):
@@ -64,7 +51,7 @@ def add_questions(filename):
             print()
             continue
         else:
-            main_menu()
+            return
 
 # Load to quiz from file
 def load_quiz(filename):
@@ -77,7 +64,8 @@ def load_quiz(filename):
     while index < len(lines):
         question = lines[index]
         choices = [lines[index+1], lines[index+2], lines[index+3], lines[index+4]]
-        answer = lines[index+5]
+        answer_line = lines[index+5]
+        answer = answer_line.split(":")[1].strip()
         quiz.append({
             "question": question,
             "choices": choices,
@@ -98,7 +86,7 @@ def run_quiz(quiz):
         user_input = input("\nYour answer (a/b/c/d): ").strip().lower()
         
         if user_input == entry["answer"]:
-            print("\n✅ Correct +1 point!")
+            print("\n✅ Correct! +1 point!")
             score += 1
         else:
             print(f"\n❌ Wrong! The answer was {entry['answer']}.")
@@ -108,6 +96,8 @@ def run_quiz(quiz):
             continue
         elif to_proceed == "no":
             print(f"\nYour final score: {score}/{len(quiz)}")
+        else:
+            print("Invalid input. Please answer with 'yes' or 'no'.")
             
         while True:
             try:
@@ -118,7 +108,7 @@ def run_quiz(quiz):
                     raise ValueError("Invalid input. Please answer with 'yes' or 'no'.")
                 
                 if back == "yes":
-                    main_menu()
+                    return
                 elif back == "no":
                     break  
             except ValueError as error:
@@ -175,6 +165,7 @@ def main_menu():
             
             elif choice == 4:
                 print("\nGoodbye, user!👋")
+                exit()
                 break
             
         except ValueError as error:   # Error if user input isn't in the choices
