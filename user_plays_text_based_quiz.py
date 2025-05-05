@@ -66,6 +66,24 @@ def add_questions(filename):
             main_menu()
 
 # Load to quiz from file
+def load_quiz(filename):
+    with open(filename, "r") as file:
+        # to remove empty lines
+        lines = [line.strip() for line in file if line.strip()]
+        
+    quiz = []
+    index = 0
+    while index < len(lines):
+        question = lines[index]
+        choices = [lines[index+1], lines[index+2], lines[index+3], lines[index+4]]
+        answer = lines[index+5]
+        quiz.append({
+            "question": question,
+            "choices": choices,
+            "answer": answer
+        })
+        index += 6     # move to the next question block
+    return quiz
 
 # Run the quiz
 # Shuffle questions
