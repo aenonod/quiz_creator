@@ -1,0 +1,42 @@
+
+Question: Who wrote the play "Romeo and Juliet"?
+a) mark twain
+b) william shakespeare
+c) sarah geronimo
+d) mark zuckerberg
+Correct answer: b
+
+Question: Which element has the chemical symbol "O"?
+a) oxygen
+b) omg
+c) osmium
+d) ohmygulay
+Correct answer: a
+
+Question: What is the largest ocean on Earth?
+a) indian ocean
+b) atlantic ocean
+c) pacific ocean
+d) arctic ocean
+Correct answer: c
+
+Question: Which planet is known as the "Red Planet"?
+a) earth
+b) saturn
+c) venus
+d) mars
+Correct answer: d
+
+Question: OOP stands for?
+a) object oriented programming
+b) oh oops problem
+c) oh our project?
+d) oms oms petmalu
+Correct answer: a
+
+Question: How old am I?
+a) 19
+b) 20
+c) 21
+d) 22
+Correct answer: a
