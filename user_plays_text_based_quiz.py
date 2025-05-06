@@ -8,6 +8,12 @@
 #    Program will check if the answer is correct
 
 import random
+import os
+import time
+
+# Function to clear screen
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Function to set filename var (for creating/opening a file)
 def file_naming():
@@ -19,8 +25,9 @@ def file_naming():
 # Function to ask user for input then store the collected data
 def quiz_creator(filename):
     with open(filename, "a") as file:
+        clear_screen()
         # Input question
-        print("\n>>> QUIZ CREATOR <<<")
+        print(">>> QUIZ CREATOR <<<")
         question = input(f"\nInput question: ").strip()
 
         # Input possible answers
@@ -35,7 +42,7 @@ def quiz_creator(filename):
             if correct_ans in ["a", "b", "c", "d"]:
                 break
             else:
-                print("❌ Invalid choice. Please enter only 'a', 'b', 'c', or 'd'.")
+                print("🚫 Invalid choice. Please enter only 'a', 'b', 'c', or 'd'.")
 
         # Store data into text file
         file.write(f"\nQuestion: {question}")
@@ -51,6 +58,7 @@ def add_questions(filename):
         quiz_creator(filename)
 
         while True:
+            clear_screen()
             add_input = input("\nDo you want to add more questions? (yes/no): ").strip().lower()
 
             if add_input == "yes":
@@ -59,7 +67,7 @@ def add_questions(filename):
             elif add_input == "no":
                 return  # Exit function entirely
             else:
-                print("Invalid input. Please answer with 'yes' or 'no'.")
+                print("🚫 Invalid input. Please answer with 'yes' or 'no'.")
 
 # Load to quiz from file
 def load_quiz(filename):
@@ -92,7 +100,7 @@ def run_quiz(quiz):
     index = 0
     while index < total:
         entry = quiz[index]
-        print("\n" + entry["question"])
+        print(entry["question"])
         for choice in entry["choices"]:
             print(choice)
             
@@ -102,15 +110,21 @@ def run_quiz(quiz):
             score += 1
             print(f"""\n✅ Correct! +1 point!
 📊 Your current score: {score}/{len(quiz)}""")
+            time.sleep(1.5)
+            clear_screen()
         else:
             print(f"""\n❌ Wrong! The answer was {entry['answer']}
 📊 Your current score: {score}/{len(quiz)}""")
+            time.sleep(1.5)
+            clear_screen()
             
         index += 1
         
         unanswered -= 1
         if unanswered == 0:
-            print(f"\n\n🏁 Quiz finished! Your final score: {score}/{total}")
+            clear_screen()
+            print(f"🏁 Quiz finished! Your final score: {score}/{total}")
+            time.sleep(2)
             
     while True:
         print("\n❗ Entering 'no' will exit the program.")
@@ -122,12 +136,17 @@ def run_quiz(quiz):
             print("\nGoodbye, user!👋")
             exit()
         else:
-            print("Invalid input. Please answer with 'yes' or 'no'.")
+            print("🚫 Invalid input. Please answer with 'yes' or 'no'.")
 
 # Function for main menu
 def main_menu():
     while True:
-        print("""\n===== MAIN MENU =====
+        clear_screen()
+        print("""WELCOME TO QUIZMATE!
+Loading...""")
+        time.sleep(2)
+        clear_screen()
+        print("""===== MAIN MENU =====
 👆 Press 1 to start a quiz
 👆 Press 2 to create new or edit an existing quiz file
 👆 Press 3 to view a quiz file
@@ -137,52 +156,65 @@ def main_menu():
             choice = int(input("\n⭐ Enter your choice: "))
             
             if choice not in [1, 2, 3, 4]:
-                raise ValueError("\nInvalid input. Please enter a number from 1 to 4.")
+                raise ValueError("🚫 Invalid input. Please enter a number from 1 to 4.")
 
             if choice == 1:
                 while True:
                     try:
                         filename = input("\nEnter filename to open (with extension): ").strip()
+                        print("📂 Loading quiz...")
+                        time.sleep(2)
                         quiz = load_quiz(filename)
+                        clear_screen()
                         run_quiz(quiz)
                         break
                     except FileNotFoundError:
-                        print("File not found. Try again.")
+                        print("\n🚫 File not found. Try again.")
+                        time.sleep(1.5)
                         continue
                 
             elif choice == 2:
                 filename = file_naming()   # Will ask for a filename
                 add_questions(filename)   # Loop to ask user for question/s
                 print(f"\n📝 Quiz '{filename}' created or updated successfully!")
+                time.sleep(2)
                     
             elif choice == 3:
                 while True:
                     filename = input("\nEnter filename to open (with extension): ").strip()
+                    time.sleep(1.5)
+                    clear_screen()
                     try:
                         with open(filename, "r") as file:   # Open file to read
                             print(f"\n>>> QUIZ ({filename}) <<<")
                             print(file.read())
                     except FileNotFoundError:
-                        print("File not found. Try again.")
+                        print("🚫 File not found. Try again.")
+                        time.sleep(1.5)
                         continue
                     
                     print("\n❗ Entering 'no' will exit the program.")        
                     back = input("Go back to main menu? (yes/no): ").strip().lower()
                     if back == "yes":
+                        time.sleep(1)
+                        clear_screen()
                         break
                     elif back == "no":
                         print("\nExiting...")
                         exit()
                     else:
-                        print("\nInvalid input. Returning to main menu...")
+                        print("\n🚫 Invalid input. Returning to main menu...")
+                        time.sleep(1)
                         break
             
             elif choice == 4:
                 print("\nGoodbye, user!👋")
-                exit()
+                time.sleep(2)
+                break
             
         except ValueError as error:   # Error if user input isn't in the choices
             print(error)
+            time.sleep(1.5)
             continue
         
 # Start the program
