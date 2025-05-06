@@ -137,12 +137,12 @@ def main_menu():
             choice = int(input("\n⭐ Enter your choice: "))
             
             if choice not in [1, 2, 3, 4]:
-                raise ValueError("Invalid input. Try again.")
+                raise ValueError("\nInvalid input. Please enter a number from 1 to 4.")
 
             if choice == 1:
                 while True:
                     try:
-                        filename = input("\nEnter filename to open (with extension): ")
+                        filename = input("\nEnter filename to open (with extension): ").strip()
                         quiz = load_quiz(filename)
                         run_quiz(quiz)
                         break
@@ -153,30 +153,33 @@ def main_menu():
             elif choice == 2:
                 filename = file_naming()   # Will ask for a filename
                 add_questions(filename)   # Loop to ask user for question/s
+                print(f"\n📝 Quiz '{filename}' created or updated successfully!")
                     
             elif choice == 3:
                 while True:
-                    filename = input("\nEnter filename to open (with extension): ")
+                    filename = input("\nEnter filename to open (with extension): ").strip()
                     try:
                         with open(filename, "r") as file:   # Open file to read
                             print(f"\n>>> QUIZ ({filename}) <<<")
                             print(file.read())
                     except FileNotFoundError:
-                        print("\nFile not found. Try again.")
+                        print("File not found. Try again.")
                         continue
                     
                     print("\n❗ Entering 'no' will exit the program.")        
-                    back = input("Go back to main menu? (yes/no): ").lower()
+                    back = input("Go back to main menu? (yes/no): ").strip().lower()
                     if back == "yes":
                         break
-                    else:
+                    elif back == "no":
                         print("\nExiting...")
                         exit()
+                    else:
+                        print("\nInvalid input. Returning to main menu...")
+                        break
             
             elif choice == 4:
                 print("\nGoodbye, user!👋")
                 exit()
-                break
             
         except ValueError as error:   # Error if user input isn't in the choices
             print(error)
